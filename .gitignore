@@ -1,0 +1,38 @@
+# Personal data, imported HTML, models and indexes
+data/
+backups/
+local_archive/
+local_settings.json
+titles.txt
+*.sqlite*
+*.db
+*.npy
+*.npz
+*.html
+*.zip
+*.log
+.env
+.env.*
+!.env.example
+
+# Local runtime
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.streamlit/secrets.toml
+
+# Old development versions and backups
+*.bak
+design_backup_*/
+main.py
+main_basic.py
+ai_test.py
+requirements_before_cleanup.txt
+
+# Editor / OS files
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini

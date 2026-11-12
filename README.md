@@ -10,15 +10,13 @@ Python · Streamlit · Sentence Transformers · SQLite
 
 ## 처음 방문했다면
 
-- **화면 보기:** 아래 실제 개발 화면과 [사용 방법](docs/usage.md)을 확인하세요.
+- **사용 흐름 보기:** [사용 방법](docs/usage.md)을 확인하세요.
 - **직접 실행:** Python 3.11이 설치된 Windows에서 아래 설치 명령을 실행한 뒤 `start_app.vbs`를 여세요. 공개 패키지는 가상 샘플 글 3개로 시작합니다.
 - **코드 살펴보기:** `app.py` → `body_check.py` → `post_manager.py` 순서로 읽으면 검사와 저장 흐름을 볼 수 있습니다.
 - **문제 해결 과정:** [개발 기록](docs/development.md)에서 AI 제목 검색 누락을 발견하고 보완한 과정을 확인하세요.
 - **검증과 기여 구분:** [검증 기록](docs/validation.md), [AI 활용과 역할](docs/contributions.md)을 확인하세요.
 
-![제목 검사 메인 화면](docs/screenshots/main.png)
-
-위 이미지는 개인 글 271편을 연결한 실제 개발 화면입니다. 공개 패키지에는 이 개인 글들의 제목·본문·데이터베이스가 들어 있지 않습니다. 공개 버전의 기본 글 수는 3편입니다.
+공개 패키지는 가상 샘플 글 3개로 시작합니다. 실제 블로그 데이터와 개인 개발 화면 캡처는 포함하지 않습니다.
 
 ## 왜 만들었나요?
 
