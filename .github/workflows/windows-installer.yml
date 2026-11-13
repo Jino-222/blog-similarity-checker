@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['installer/**', '*.py', '*.pyw', 'requirements.txt', '.github/workflows/windows-installer.yml']
+    paths: ['installer/**', 'tests/**', '*.py', '*.pyw', 'requirements.txt', '.github/workflows/windows-installer.yml']
 permissions:
   contents: read
 jobs:
