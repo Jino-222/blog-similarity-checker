@@ -1,0 +1,13 @@
+{
+  "date": "2026-11-12",
+  "environment": "Windows, Python 3.11.9, existing development virtual environment",
+  "command": "python -X utf8 -m unittest discover -s tests -v",
+  "tests_run": 12,
+  "failures": 0,
+  "errors": 0,
+  "unittest_elapsed_seconds": 0.226,
+  "result": "OK",
+  "scope": "Synthetic data tests for URL handling, persistence, data selection and HTML parsing",
+  "not_covered": ["fresh installation", "model quality metrics", "full UI regression", "other Windows computers"]
+}
+
