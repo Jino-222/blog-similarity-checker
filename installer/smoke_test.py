@@ -5,6 +5,7 @@ from pathlib import Path
 
 root = Path(sys.argv[1]).resolve()
 os.environ['HF_HOME'] = str(root / 'data/models')
+os.environ['HF_HUB_OFFLINE'] = '1'
 from streamlit.testing.v1 import AppTest
 app = AppTest.from_file(str(root / 'app.py'), default_timeout=180).run()
 assert not app.exception, app.exception

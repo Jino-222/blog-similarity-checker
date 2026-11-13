@@ -102,6 +102,7 @@ def main(no_browser=False):
         if not python.is_file():
             python = ROOT / 'runtime' / 'python.exe'
             os.environ['HF_HOME'] = str(ROOT / 'data' / 'models')
+            os.environ['HF_HUB_OFFLINE'] = '1'
         if not python.is_file():
             raise RuntimeError('Python 실행 환경이 없습니다. README의 설치 방법을 확인해 주세요.')
         STATE.parent.mkdir(parents=True, exist_ok=True)
