@@ -43,6 +43,7 @@ class Setup : Form {
     }
     void Run(string file, string args) {
         var info=new ProcessStartInfo(file,args) { WorkingDirectory=root, UseShellExecute=false, CreateNoWindow=true, RedirectStandardOutput=true, RedirectStandardError=true };
+        info.StandardOutputEncoding=Encoding.UTF8; info.StandardErrorEncoding=Encoding.UTF8;
         info.EnvironmentVariables["PYTHONUTF8"]="1";
         info.EnvironmentVariables["HF_HOME"]=Path.Combine(root,"data","models");
         info.EnvironmentVariables["PIP_DISABLE_PIP_VERSION_CHECK"]="1";

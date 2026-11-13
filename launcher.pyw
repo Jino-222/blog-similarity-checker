@@ -49,6 +49,7 @@ def main(no_browser=False):
     ready = threading.Event()
     token = secrets.token_urlsafe(32)
     child = None
+    server_thread = None
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *args):
@@ -108,7 +109,8 @@ def main(no_browser=False):
         STATE.parent.mkdir(parents=True, exist_ok=True)
         STATE.write_text(json.dumps({'identity': IDENTITY, 'token': token,
                                     'control_url': CONTROL_URL}), encoding='utf-8')
-        threading.Thread(target=server.serve_forever, daemon=True).start()
+        server_thread = threading.Thread(target=server.serve_forever, daemon=True)
+        server_thread.start()
         with (STATE.parent / 'server.log').open('a', encoding='utf-8') as log:
             child = subprocess.Popen([
                 str(python), '-m', 'streamlit', 'run', str(ROOT / 'app.py'),
@@ -153,6 +155,9 @@ def main(no_browser=False):
                     STATE.unlink()
             except (OSError, ValueError):
                 pass
+        if server_thread is not None:
+            server.shutdown()
+            server_thread.join(timeout=5)
         server.server_close()
 
 
