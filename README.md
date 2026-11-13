@@ -8,10 +8,18 @@ Python · Streamlit · Sentence Transformers · SQLite
 
 공개된 다국어 문장 임베딩 모델을 활용한 응용 프로젝트입니다. 모델을 직접 학습하지 않았으며, 표절 여부나 중복 확률을 판정하는 서비스는 아닙니다.
 
+## Windows 자동 설치판
+
+**[설치 파일 다운로드](https://github.com/Jino-222/blog-similarity-checker/releases/latest)**
+
+`BlogSimilarityChecker-Setup.exe` 실행 → **설치 시작** → **검사기 실행**
+
+Python과 AI 모델을 자동으로 준비하고 바탕화면 아이콘을 만듭니다. 첫 설치에는 인터넷이 필요하며, 샘플 글 3개로 시작합니다. Windows 10/11 Intel·AMD 64비트용입니다. [설치·업데이트·제거 안내](docs/windows-installer.md)
+
 ## 처음 방문했다면
 
 - **사용 흐름 보기:** [사용 방법](docs/usage.md)을 확인하세요.
-- **직접 실행:** Python 3.11이 설치된 Windows에서 아래 설치 명령을 실행한 뒤 `start_app.vbs`를 여세요. 공개 패키지는 가상 샘플 글 3개로 시작합니다.
+- **간편 실행:** 위 자동 설치판을 내려받으세요. Python 설치나 명령어 입력 없이 준비할 수 있습니다.
 - **코드 살펴보기:** `app.py` → `body_check.py` → `post_manager.py` 순서로 읽으면 검사와 저장 흐름을 볼 수 있습니다.
 - **문제 해결 과정:** [개발 기록](docs/development.md)에서 AI 제목 검색 누락을 발견하고 보완한 과정을 확인하세요.
 - **검증과 기여 구분:** [검증 기록](docs/validation.md), [AI 활용과 역할](docs/contributions.md)을 확인하세요.
@@ -35,7 +43,7 @@ Python · Streamlit · Sentence Transformers · SQLite
 | 글 등록·수정 | 게시글 주소·제목·본문 저장 | 글 번호를 기준으로 추가 또는 갱신하고 수정 전 내용 보관 |
 | 간편 실행 | 실행 파일 또는 바로가기 열기 | CMD 없이 브라우저 열기, 중복 실행 방지, 종료 버튼 제공 |
 
-## Windows에서 설치와 실행
+## 개발자용: 소스 코드에서 설치와 실행
 
 개발·확인 환경은 **Windows / Python 3.11.9**입니다. Python launcher(`py`)가 설치되어 있어야 합니다. 이 저장소를 내려받아 압축을 풀고, `app.py`가 있는 폴더에서 명령 프롬프트를 엽니다.
 
@@ -44,7 +52,7 @@ py -3.11 -m venv .venv
 .venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
-설치 후 **`start_app.vbs`를 더블클릭**합니다. Python이 없는 컴퓨터에서 단독으로 실행되는 EXE 패키지는 아닙니다.
+설치 후 **`start_app.vbs`를 더블클릭**합니다. 이 절은 소스 코드 직접 실행 방법입니다. 일반 사용자는 위 자동 설치판을 사용하세요.
 
 - 첫 AI 검사에서는 모델을 다운로드하므로 인터넷과 저장 공간이 필요합니다.
 - 비교 연산은 로컬에서 수행합니다. 유료 AI API 키는 사용하지 않습니다.
@@ -146,4 +154,3 @@ flowchart LR
 다음 개선 대상으로 한국어 검색 평가 사례 확대, 공통 도입 문구 처리, 바뀐 문단만 갱신하는 캐시, 더 편리한 설치 패키지를 고려하고 있습니다. 현재 구현된 기능과 향후 계획을 구분해 관리합니다.
 
 사용 모델: [Sentence Transformers 다국어 MiniLM 모델](https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2) · [Streamlit](https://docs.streamlit.io/) · [Sentence Transformers](https://sbert.net/)
-

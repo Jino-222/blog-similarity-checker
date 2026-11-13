@@ -100,6 +100,9 @@ def main(no_browser=False):
             probe.bind(('127.0.0.1', APP_PORT))
         python = ROOT / '.venv' / 'Scripts' / 'python.exe'
         if not python.is_file():
+            python = ROOT / 'runtime' / 'python.exe'
+            os.environ['HF_HOME'] = str(ROOT / 'data' / 'models')
+        if not python.is_file():
             raise RuntimeError('Python 실행 환경이 없습니다. README의 설치 방법을 확인해 주세요.')
         STATE.parent.mkdir(parents=True, exist_ok=True)
         STATE.write_text(json.dumps({'identity': IDENTITY, 'token': token,
@@ -158,9 +161,5 @@ if __name__ == '__main__':
     except Exception as error:
         if '--no-browser' in sys.argv:
             raise
-        import tkinter as tk
-        from tkinter import messagebox
-        window = tk.Tk()
-        window.withdraw()
-        messagebox.showerror('내 블로그 중복 검사', str(error))
-        window.destroy()
+        import ctypes
+        ctypes.windll.user32.MessageBoxW(None, str(error), '내 블로그 중복 검사', 0x10)

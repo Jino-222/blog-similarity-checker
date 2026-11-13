@@ -1,0 +1,56 @@
+name: Windows installer
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['installer/**', '.github/workflows/windows-installer.yml']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: windows-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build installer
+        run: python installer/build.py
+      - name: Install in an empty directory
+        shell: pwsh
+        run: |
+          $target = Join-Path $env:RUNNER_TEMP 'blog-check-install'
+          $p = Start-Process -FilePath "$pwd/dist/BlogSimilarityChecker-Setup.exe" -ArgumentList "--quiet --install-dir `"$target`"" -Wait -PassThru -WindowStyle Hidden
+          if (Test-Path "$target/data/install.log") { Get-Content "$target/data/install.log" -Tail 30 }
+          if ($p.ExitCode -ne 0) { throw "Installer failed: $($p.ExitCode)" }
+          $shortcut = Join-Path ([Environment]::GetFolderPath('DesktopDirectory')) 'Blog Similarity Checker.lnk'
+          if (!(Test-Path $shortcut)) { throw 'Desktop shortcut missing' }
+          & "$target/runtime/python.exe" installer/smoke_test.py $target --launcher
+          if ($LASTEXITCODE -ne 0) { throw 'Installed app smoke test failed' }
+          & "$target/runtime/python.exe" -m unittest discover -s tests -v
+          if ($LASTEXITCODE -ne 0) { throw 'Core tests failed' }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-installer
+          path: |
+            dist/BlogSimilarityChecker-Setup.exe
+            dist/SHA256SUMS.txt
+  release:
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: windows-installer
+          path: dist
+      - name: Publish verified download
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          COMMIT: ${{ github.sha }}
+        run: |
+          TAG="installer-${GITHUB_RUN_NUMBER}"
+          gh release create "$TAG" dist/BlogSimilarityChecker-Setup.exe dist/SHA256SUMS.txt --target "$COMMIT" --title "Windows 자동 설치판" --notes "Windows 10/11 Intel·AMD 64비트용. 전용 Python·라이브러리·AI 모델 자동 준비 및 바탕화면 아이콘 생성. 첫 설치 인터넷 필요. 개인 블로그 자료 미포함, 샘플 3개 제공. 서명되지 않은 개인 프로젝트 실행 파일. Windows CI에서 별도 환경 설치 및 제목·본문 검사 확인."

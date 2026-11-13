@@ -36,3 +36,6 @@ requirements_before_cleanup.txt
 .idea/
 Thumbs.db
 Desktop.ini
+
+runtime/
+dist/
