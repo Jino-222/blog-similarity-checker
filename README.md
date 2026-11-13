@@ -10,7 +10,7 @@ Python · Streamlit · Sentence Transformers · SQLite
 
 ## Windows 자동 설치판
 
-**[설치 파일 다운로드](https://github.com/Jino-222/blog-similarity-checker/releases/latest)**
+**[Windows 설치 파일 바로 다운로드](https://github.com/Jino-222/blog-similarity-checker/releases/latest/download/BlogSimilarityChecker-Setup.exe)** · [버전·검증값 확인](https://github.com/Jino-222/blog-similarity-checker/releases/latest)
 
 `BlogSimilarityChecker-Setup.exe` 실행 → **설치 시작** → **검사기 실행**
 

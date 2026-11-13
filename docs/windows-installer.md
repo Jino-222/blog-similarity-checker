@@ -45,3 +45,16 @@ Windows 10/11 Intel·AMD 64비트용입니다. ARM Windows는 지원 대상으�
 - CI 검증은 모든 개인 PC·백신·기업 보안 환경의 호환성을 보장하지 않음
 
 Python embedded 배포본은 이 앱 전용입니다. 사용자의 일반 Python 개발 환경을 대신하지 않습니다.
+
+## 검증 기록 (2026-11-13)
+
+[Windows 자동 검증 실행](https://github.com/Jino-222/blog-similarity-checker/actions/runs/43339890769)
+
+- GitHub Windows Server 2025의 빈 폴더에 전용 Python·의존성·모델 설치 성공
+- 바탕화면 바로가기 생성 확인
+- 설치된 Python으로 샘플 제목 검사·본문 검사·등록 화면 확인
+- 준비 상태·중복 실행·인증된 종료 요청과 실행 정보 정리 확인
+- 기존 자동 검사 12개 통과
+- 공개 Release 파일 다운로드 및 SHA-256 일치 확인
+
+모든 개인 PC와 보안 프로그램 조합에 대한 검증은 아니며, Windows 10/11의 개별 설치 환경에서 추가 확인이 필요할 수 있습니다.
